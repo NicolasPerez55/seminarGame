@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.Tilemaps;
 
 public class Ghost : MonoBehaviour
@@ -14,7 +15,13 @@ public class Ghost : MonoBehaviour
     private void Awake()
     {
         tilemap = GetComponentInChildren<Tilemap>();
-        cells = new Vector3Int[4];
+        print(trackingPiece);
+    }
+
+    private void Start()
+    {
+        print(trackingPiece.cells.Length);
+        cells = new Vector3Int[trackingPiece.cells.Length];
     }
 
     private void LateUpdate()
@@ -36,6 +43,7 @@ public class Ghost : MonoBehaviour
 
     private void Copy()
     {
+        cells = new Vector3Int[trackingPiece.cells.Length];
         for (int i = 0; i < cells.Length; i++) {
             cells[i] = trackingPiece.cells[i];
         }
