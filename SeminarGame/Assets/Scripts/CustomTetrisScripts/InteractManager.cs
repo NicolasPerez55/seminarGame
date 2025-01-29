@@ -19,6 +19,7 @@ public class InteractManager : MonoBehaviour
 	private float shakeDuration = 0.5f;
 	
 	[SerializeField] private GameObject phone;
+	[SerializeField] private GameObject door;
 
 	void Awake()
 	{
@@ -49,6 +50,7 @@ public class InteractManager : MonoBehaviour
 		{
 			isRinging = true;
 			StartCoroutine(RingPhone());
+			Debug.Log("work");
 		}
 	}
 	
