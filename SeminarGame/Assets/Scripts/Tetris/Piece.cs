@@ -169,8 +169,11 @@ public class Piece : MonoBehaviour
         trail.transform.position = position + (Vector3)data.middle;
         trail.Clear();
 
-        trail.startWidth = data.width;
-        trail.endWidth = data.width;
+        // Commented out because whatever this is supposed to do, it didn't do that
+        // and instead caused the trail to be invisible
+        // trail.startWidth = data.width;
+        // trail.endWidth = data.width;
+
     }
 
     private bool Move(Vector2Int translation)
