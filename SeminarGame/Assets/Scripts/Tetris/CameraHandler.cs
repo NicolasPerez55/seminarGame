@@ -7,6 +7,7 @@ public class CameraHandler : MonoBehaviour
     public Vector2 velocity;
 
     public int zoomIndex = 0;
+    public float zoomScale = 0.66f;
 
     public float damp = .96f;
     public float spring = .3f;
@@ -18,11 +19,6 @@ public class CameraHandler : MonoBehaviour
         velocity -= (Vector2)transform.position * spring * Time.deltaTime;
 
         transform.position += (Vector3)velocity * Time.deltaTime;
-
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            IncrementZoom();
-        }
     }
 
     public void Shake(Vector2 direction)
@@ -34,6 +30,6 @@ public class CameraHandler : MonoBehaviour
     {
         zoomIndex++;
         if (zoomIndex <= 5)
-            Camera.main.orthographicSize += 0.66f;
+            Camera.main.orthographicSize += zoomScale;
     }
 }

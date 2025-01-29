@@ -29,7 +29,10 @@ public class InteractManager : MonoBehaviour
 
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Interact();
+        }
     }
 
     public void Interact()
