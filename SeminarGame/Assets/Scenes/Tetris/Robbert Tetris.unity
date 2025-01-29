@@ -1433,7 +1433,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phone: {fileID: 1057610497}
+  shakeIntensity: 0.05
   door: {fileID: 611020133}
+  knockRepetitions: 3
+  knockPauseDuration: 3
+  knockScaleIntensity: 3
+  shakeDuration: 0.05
 --- !u!4 &984687520
 Transform:
   m_ObjectHideFlags: 0
