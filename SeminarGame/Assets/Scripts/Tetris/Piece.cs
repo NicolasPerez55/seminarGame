@@ -32,6 +32,8 @@ public class Piece : MonoBehaviour
 
     public void Initialize(Board board, Vector3Int position, TetrominoData data)
     {
+        cells = null;
+
         this.data = data;
         this.board = board;
         this.position = position;
