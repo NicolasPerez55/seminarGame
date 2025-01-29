@@ -26,6 +26,16 @@ public class Board : MonoBehaviour
         }
     }
 
+
+    [Header("Points")]
+    [SerializeField] private int pointsPerLine = 100;
+    [SerializeField] private TMPro.TextMeshProUGUI pointsText;
+    private int totalPoints;
+    [HideInInspector] public int TotalPoints
+    {
+        get => totalPoints;
+    }
+
     private void Awake()
     {
         tilemap = GetComponentInChildren<Tilemap>();
@@ -102,7 +112,8 @@ public class Board : MonoBehaviour
     {
         tilemap.ClearAllTiles();
 
-        // Do anything else you want on game over here..
+        totalPoints = 0;
+        pointsText.text = totalPoints.ToString();
     }
 
     public void Set(Piece piece)
@@ -148,6 +159,7 @@ public class Board : MonoBehaviour
 
     public void ClearLines()
     {
+        int totalLines = 0;
         RectInt bounds = Bounds;
         int row = bounds.yMin;
 
@@ -157,10 +169,12 @@ public class Board : MonoBehaviour
             // Only advance to the next row if the current is not cleared
             // because the tiles above will fall down when a row is cleared
             if (IsLineFull(row)) {
+                totalLines++;
                 LineClear(row);
             } else {
                 row++;
             }
+            UpdatePoints(totalLines);
         }
     }
 
@@ -206,6 +220,14 @@ public class Board : MonoBehaviour
 
             row++;
         }
+    }
+
+    public void UpdatePoints(int linesCleared)
+    {
+        if (linesCleared == 0) return;
+        int clearedPoints = (int)(pointsPerLine * Mathf.Pow(2, linesCleared - 1));
+        totalPoints += clearedPoints;
+        pointsText.text = totalPoints.ToString();
     }
 
 }
