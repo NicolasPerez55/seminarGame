@@ -196,8 +196,13 @@ public class Piece : MonoBehaviour
         // and we need to revert
         int originalRotation = rotationIndex;
 
-        // Rotate all of the cells using a rotation matrix
-        rotationIndex = Wrap(rotationIndex + direction, 0, 4);
+        // Get the maximum number of rotations based on the current tetromino type
+        int maxRotation = (data.tetromino == Tetromino.Phone) ? 6 : 4;
+
+        // Rotate using the correct wrap logic for the current tetromino
+        rotationIndex = Wrap(rotationIndex + direction, 0, maxRotation);
+
+        // Apply the rotation matrix for the piece
         ApplyRotationMatrix(direction);
 
         // Revert the rotation if the wall kick tests fail
@@ -207,6 +212,7 @@ public class Piece : MonoBehaviour
             ApplyRotationMatrix(-direction);
         }
     }
+
 
     private void ApplyRotationMatrix(int direction)
     {
