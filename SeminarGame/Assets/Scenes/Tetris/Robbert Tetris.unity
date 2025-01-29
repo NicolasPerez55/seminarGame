@@ -672,6 +672,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: {x: 0, y: 0}
+  zoomIndex: 0
   damp: 15
   spring: 50
 --- !u!1 &557922768
@@ -1182,7 +1183,7 @@ GameObject:
   - component: {fileID: 1057610499}
   - component: {fileID: 1057610498}
   m_Layer: 0
-  m_Name: pngwing.com
+  m_Name: Phone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1228,7 +1229,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 38d9daefa44b1844b9281388ac37a060, type: 3}
   m_Color: {r: 1, g: 0.7710097, b: 0, a: 1}
   m_FlipX: 0
@@ -1249,9 +1250,9 @@ Transform:
   m_GameObject: {fileID: 1057610497}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.09437516, w: 0.99553674}
-  m_LocalPosition: {x: 37, y: 4.386999, z: -1.59}
-  m_LocalScale: {x: 2.6407726, y: 2.6407726, z: 2.6407726}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 37, y: 4.386999, z: -7.28}
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 10.831}
@@ -1850,6 +1851,8 @@ MonoBehaviour:
   - {fileID: 708801601}
   inputTapDelay: 0.3
   inputHoldDelay: 0.05
+  phone: {fileID: 1057610497}
+  phoneOffset: {x: 1, y: 0.3, z: -3}
 --- !u!114 &1887623656
 MonoBehaviour:
   m_ObjectHideFlags: 0
