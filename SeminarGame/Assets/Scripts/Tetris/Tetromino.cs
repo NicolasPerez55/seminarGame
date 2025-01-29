@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 public enum Tetromino
 {
-    I, J, L, O, S, T, Z, Phone, Empty
+    I, J, L, O, S, T, Z, Phone, Door, Not, Fish, Box, Empty
 }
 
 [System.Serializable]

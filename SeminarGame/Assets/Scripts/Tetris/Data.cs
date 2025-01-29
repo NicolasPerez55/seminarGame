@@ -17,6 +17,10 @@ public static class Data
 		{ Tetromino.T, new Vector2Int[] { new Vector2Int( 0, 1), new Vector2Int(-1, 0), new Vector2Int( 0, 0), new Vector2Int( 1, 0) } },
 		{ Tetromino.Z, new Vector2Int[] { new Vector2Int(-1, 1), new Vector2Int( 0, 1), new Vector2Int( 0, 0), new Vector2Int( 1, 0) } },
 		{ Tetromino.Phone, new Vector2Int[] { new Vector2Int(0, 1), new Vector2Int(1, 1), new Vector2Int(1, 0), new Vector2Int(0, -1), new Vector2Int(1, -1) } },
+		{ Tetromino.Door, new Vector2Int[] { new Vector2Int(0,-1), new Vector2Int(0, 0), new Vector2Int(0, 1), new Vector2Int(1, -1), new Vector2Int(1, 0), new Vector2Int(1, 1) } },
+		{ Tetromino.Not, new Vector2Int[] { new Vector2Int( 0, 1), new Vector2Int( 1, 1), new Vector2Int( 0, 0), new Vector2Int( 1, 0) } },
+		{ Tetromino.Fish, new Vector2Int[] { new Vector2Int(0,-1), new Vector2Int(0, 0), new Vector2Int(0, 1), new Vector2Int(1, -1), new Vector2Int(1, 0), new Vector2Int(1, 1) } },
+		{ Tetromino.Box, new Vector2Int[] { new Vector2Int( 0, 1), new Vector2Int( 1, 1), new Vector2Int( 0, 0), new Vector2Int( 1, 0) } },
 	};
 
 	private static readonly Vector2Int[,] WallKicksI = new Vector2Int[,] {
@@ -51,6 +55,10 @@ public static class Data
 		{ Tetromino.T, WallKicksJLOSTZ },
 		{ Tetromino.Z, WallKicksJLOSTZ },
 		{ Tetromino.Phone, WallKicksJLOSTZ },
+		{ Tetromino.Door, WallKicksJLOSTZ},
+		{ Tetromino.Not, WallKicksJLOSTZ },
+		{ Tetromino.Fish, WallKicksJLOSTZ },
+		{ Tetromino.Box, WallKicksJLOSTZ },
 		
 	};
 
