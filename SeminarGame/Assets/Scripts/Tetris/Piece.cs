@@ -32,7 +32,12 @@ public class Piece : MonoBehaviour
 	
 	[SerializeField] private GameObject phone; 
 	[SerializeField] private Vector3 phoneOffset;
+	private Vector3 phonePosition;
 
+	public void Start()
+	{
+		phonePosition = phone.transform.position;
+	}
 	public void Initialize(Board board, Vector3Int position, TetrominoData data)
 	{
 		cells = null;
@@ -97,6 +102,11 @@ public class Piece : MonoBehaviour
 		trail.transform.position = position;
 
 		board.Set(this);
+		
+		if (Vector3.Distance(phone.transform.position, phonePosition) > 0.5f)
+		{
+			phone.transform.position = phonePosition;
+		}
 	}
 
 	private void HandleMoveInputs()
@@ -197,6 +207,7 @@ public class Piece : MonoBehaviour
 			if (data.tetromino == Tetromino.Phone)
 			{
 				phone.transform.position = newPosition + phoneOffset;
+				phonePosition = newPosition + phoneOffset;
 			}
 		}
 
