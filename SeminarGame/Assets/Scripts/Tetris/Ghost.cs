@@ -15,12 +15,10 @@ public class Ghost : MonoBehaviour
     private void Awake()
     {
         tilemap = GetComponentInChildren<Tilemap>();
-        print(trackingPiece);
     }
 
     private void Start()
     {
-        print(trackingPiece.cells.Length);
         cells = new Vector3Int[trackingPiece.cells.Length];
     }
 
