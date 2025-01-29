@@ -36,6 +36,12 @@ public class Piece : MonoBehaviour
 	
 	[SerializeField] private GameObject door;
 	[SerializeField] private Vector3 doorOffset;
+	
+	[SerializeField] private GameObject notification;
+	[SerializeField] private Vector3 notificationOffset;
+	
+	[SerializeField] private GameObject box;
+	[SerializeField] private Vector3 boxOffset;
 
 	public void Start()
 	{
@@ -214,6 +220,12 @@ public class Piece : MonoBehaviour
 			} else if (data.tetromino == Tetromino.Door)
 			{
 				door.transform.position = newPosition + doorOffset;
+			} else if (data.tetromino == Tetromino.Not)
+			{
+				notification.transform.position = newPosition + notificationOffset;
+			} else if (data.tetromino == Tetromino.Box)
+			{
+				box.transform.position = newPosition + boxOffset;
 			}
 		}
 

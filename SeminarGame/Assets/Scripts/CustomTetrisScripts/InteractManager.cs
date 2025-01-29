@@ -25,6 +25,10 @@ public class InteractManager : MonoBehaviour
 	[SerializeField] private float knockPauseDuration  = 1f;
 	[SerializeField] private float knockScaleIntensity = 5f;
 	[SerializeField] private float shakeDuration = 0.5f;
+	
+	[SerializeField] private GameObject notification;
+	
+	[SerializeField] private GameObject Box;
 
 	void Awake()
 	{
