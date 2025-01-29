@@ -42,6 +42,13 @@ public class Piece : MonoBehaviour
 	
 	[SerializeField] private GameObject box;
 	[SerializeField] private Vector3 boxOffset;
+	
+	
+	[SerializeField] private GameObject fish;
+	[SerializeField] private Vector3 fishOffset;
+	
+	[SerializeField] private GameObject fishFood;
+	[SerializeField] private Vector3 foodOffset;
 
 	public void Start()
 	{
@@ -226,6 +233,12 @@ public class Piece : MonoBehaviour
 			} else if (data.tetromino == Tetromino.Box)
 			{
 				box.transform.position = newPosition + boxOffset;
+			} else if (data.tetromino == Tetromino.Fish)
+			{
+				fish.transform.position = newPosition + fishOffset;
+			} else if (data.tetromino == Tetromino.FishFood)
+			{
+				fishFood.transform.position = newPosition + foodOffset;
 			}
 		}
 
@@ -234,7 +247,7 @@ public class Piece : MonoBehaviour
 
 	private void Rotate(int direction)
 	{
-		if (data.tetromino != Tetromino.Phone)
+		if (data.tetromino != Tetromino.Phone && data.tetromino != Tetromino.Door && data.tetromino != Tetromino.Not && data.tetromino != Tetromino.Fish && data.tetromino != Tetromino.Box && data.tetromino != Tetromino.FishFood)
 		{
 			// Store the current rotation in case the rotation fails
 			// and we need to revert

@@ -28,7 +28,10 @@ public class InteractManager : MonoBehaviour
 	
 	[SerializeField] private GameObject notification;
 	
-	[SerializeField] private GameObject Box;
+	[SerializeField] private GameObject box;
+	
+	[SerializeField] private GameObject fish;
+	[SerializeField] private GameObject fishFood;
 
 	void Awake()
 	{
