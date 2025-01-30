@@ -103,7 +103,7 @@ public class InteractManager : MonoBehaviour
 		{
 			isKnocking = true;
 			StartCoroutine(KnockDoor()); // Start door knock animation
-			if (currentRealityObjectSound != "doorKnocking" && currentRealityObjectSound != "phoneRinging")
+			if (currentRealityObjectSound != "doorKnocking")
 			{
 				audio.mute = false;
 				audio.clip = doorKnockingSound;
