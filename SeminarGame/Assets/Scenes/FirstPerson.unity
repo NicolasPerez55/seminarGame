@@ -1652,7 +1652,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3255673126108304427, guid: 62bd457adfa663b4b8de2903bb4c8006, type: 3}
   m_PrefabInstance: {fileID: 1467667101}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &288613611
+--- !u!114 &288613618
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1661,9 +1661,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 288613604}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5c98aefd58640d4f86e4d8b2cd84823, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d5ff67876424c447ad083eae2d0e486, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  escapeCanvas: {fileID: 1113978202}
+  escapeButton: {fileID: 1850631419}
+  escapeTV: {fileID: 1747586509}
+  player: {fileID: 1288029582}
+  cameraController: {fileID: 105926530}
 --- !u!1 &293643873
 GameObject:
   m_ObjectHideFlags: 0
@@ -5219,28 +5224,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f21f9100e9f895143be4a4d4bcea9dbb, type: 3}
---- !u!1 &1163113260 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3255673126108304427, guid: 62bd457adfa663b4b8de2903bb4c8006, type: 3}
-  m_PrefabInstance: {fileID: 1467667101}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1163113267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1163113260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d5ff67876424c447ad083eae2d0e486, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  escapeCanvas: {fileID: 1113978202}
-  escapeButton: {fileID: 1850631419}
-  escapeTV: {fileID: 1747586509}
-  player: {fileID: 1288029582}
-  cameraController: {fileID: 105926530}
 --- !u!4 &1173986136 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1017606091530846216, guid: c5be39b879c83f54d9bbfebe68c809be, type: 3}
@@ -6893,19 +6876,8 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3255673126108304427, guid: 62bd457adfa663b4b8de2903bb4c8006, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1163113267}
-    - targetCorrespondingSourceObject: {fileID: 1295196397471629250, guid: 62bd457adfa663b4b8de2903bb4c8006, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1581111993}
-    - targetCorrespondingSourceObject: {fileID: 3255673126108304427, guid: 62bd457adfa663b4b8de2903bb4c8006, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 288613611}
+      addedObject: {fileID: 288613618}
   m_SourcePrefab: {fileID: 100100000, guid: 62bd457adfa663b4b8de2903bb4c8006, type: 3}
---- !u!1 &1467667102 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1295196397471629250, guid: 62bd457adfa663b4b8de2903bb4c8006, type: 3}
-  m_PrefabInstance: {fileID: 1467667101}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1473492784 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1382648566164412814, guid: d9d9f374cc51a6b4fb75751346d70b83, type: 3}
@@ -8268,7 +8240,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1163113267}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Escape, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
