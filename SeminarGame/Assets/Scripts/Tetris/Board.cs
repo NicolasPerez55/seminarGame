@@ -7,239 +7,249 @@ using UnityEngine.Tilemaps;
 [DefaultExecutionOrder(-1)]
 public class Board : MonoBehaviour
 {
-    public Tilemap tilemap { get; private set; }
-    public Piece activePiece { get; private set; }
+	public Tilemap tilemap { get; private set; }
+	public Piece activePiece { get; private set; }
 
-    public QueueHandler queue;
-    public StorageHandler storage;
+	public QueueHandler queue;
+	public StorageHandler storage;
 
-    public TetrominoData[] tetrominoes;
-    public Vector2Int boardSize = new Vector2Int(10, 20);
-    public Vector3Int spawnPosition = new Vector3Int(-1, 8, 0);
-
-    public GameObject particleClearLine;
-
-    public int spawnpiece;
-
-    public RectInt Bounds
-    {
-        get
-        {
-            Vector2Int position = new Vector2Int(-boardSize.x / 2, -boardSize.y / 2);
-            return new RectInt(position, boardSize);
-        }
-    }
+	public TetrominoData[] tetrominoes;
+	public Vector2Int boardSize = new Vector2Int(10, 20);
+	public Vector3Int spawnPosition = new Vector3Int(-1, 8, 0);
+	
+	private float elapsedTime;
+	[SerializeField] private int nextSpecialPieceTime = 60; // First special piece appears at 1 min
+	private int specialPieceIndex = 7; // Start at 8th tetromino (index 7)
+	private List<int> specialPieces = new List<int> { 7, 8, 9, 10, 11 }; // Indices of the special pieces
 
 
-    [Header("Points")]
-    [SerializeField] private int pointsPerLine = 100;
-    [SerializeField] private TMPro.TextMeshProUGUI pointsText;
-    private int totalPoints;
-    [HideInInspector] public int TotalPoints
-    {
-        get => totalPoints;
-    }
+	public RectInt Bounds
+	{
+		get
+		{
+			Vector2Int position = new Vector2Int(-boardSize.x / 2, -boardSize.y / 2);
+			return new RectInt(position, boardSize);
+		}
+	}
 
-    private void Awake()
-    {
-        tilemap = GetComponentInChildren<Tilemap>();
-        activePiece = GetComponentInChildren<Piece>();
 
-        for (int i = 0; i < tetrominoes.Length; i++) {
-            tetrominoes[i].Initialize();
-        }
-    }
+	[Header("Points")]
+	[SerializeField] private int pointsPerLine = 100;
+	[SerializeField] private TMPro.TextMeshProUGUI pointsText;
+	private int totalPoints;
+	[HideInInspector] public int TotalPoints
+	{
+		get => totalPoints;
+	}
 
-    private void Start()
-    {
-        SpawnPiece();
-    }
+	private void Awake()
+	{
+		tilemap = GetComponentInChildren<Tilemap>();
+		activePiece = GetComponentInChildren<Piece>();
 
-    public void SpawnPiece()
-    {
-        if (queue == null)
-        {
-            Debug.LogError("Attach a queue component to the board.");
+		for (int i = 0; i < tetrominoes.Length; i++) {
+			tetrominoes[i].Initialize();
+		}
+	}
 
-            return;
-        }
+	private void Start()
+	{
+		SpawnPiece();
+	}
 
-        if (storage != null) storage.used = false;
+	public void SpawnPiece()
+	{
+		if (queue == null)
+		{
+			Debug.LogError("Attach a queue component to the board.");
+			return;
+		}
 
-        for (int i = queue.queuedPieces.Count(); i < queue.queueLength+1; ++i)
-        {
-            int random = Random.Range(0, tetrominoes.Length);
-            queue.queuedPieces.Add(tetrominoes[random]);
+		if (storage != null) storage.used = false;
 
-            //Useful for debugging specific pieces.
-            //queue.queuedPieces.Add(tetrominoes[spawnpiece]);
-        }
+		// Ensure the queue is filled with the first 7 tetrominoes
+		while (queue.queuedPieces.Count < queue.queueLength + 1)
+		{
+			int random = Random.Range(0, 7); // Only pick from the first 7 standard tetrominoes
+			queue.queuedPieces.Add(tetrominoes[random]);
+		}
 
-        activePiece.Initialize(this, spawnPosition, queue.queuedPieces.FirstOrDefault());
+		activePiece.Initialize(this, spawnPosition, queue.queuedPieces.FirstOrDefault());
 
-        queue.queuedPieces.Remove(queue.queuedPieces.FirstOrDefault());
-        queue.UpdateDisplay();
+		queue.queuedPieces.RemoveAt(0);
+		queue.UpdateDisplay();
 
-        if (IsValidPosition(activePiece, spawnPosition)) {
-            Set(activePiece);
-        } else {
-            GameOver();
-        }
-    }
+		if (IsValidPosition(activePiece, spawnPosition))
+		{
+			Set(activePiece);
+		}
+		else
+		{
+			GameOver();
+		}
+	}
+	
+	private void Update()
+	{
+		elapsedTime += Time.deltaTime;
 
-    public void StorePiece()
-    {
-        if (storage == null)
-        {
-            Debug.LogError("Attach a storage component to the board.");
+		// Check if it's time to release a special piece
+		if (specialPieces.Count > 0 && elapsedTime >= nextSpecialPieceTime)
+		{
+			nextSpecialPieceTime += 60; // Next special piece appears in 1 more minute
+			queue.queuedPieces.Add(tetrominoes[specialPieces[0]]); // Add the special piece
+			specialPieces.RemoveAt(0); // Remove it from the list so it doesn't appear again
+		}
+	}
 
-            return;
-        }
+	public void StorePiece()
+	{
+		if (storage == null)
+		{
+			Debug.LogError("Attach a storage component to the board.");
 
-        if (storage.used) return;
+			return;
+		}
 
-        TetrominoData oldStoredPiece = storage.piece;
+		if (storage.used) return;
 
-        storage.AddToStorage(activePiece.data);
-        storage.UpdateDisplay();
+		TetrominoData oldStoredPiece = storage.piece;
 
-        if (oldStoredPiece.tetromino != Tetromino.Empty)
-        {
-            activePiece.Initialize(this, spawnPosition, oldStoredPiece);
-        }
-        else
-        {
-            SpawnPiece();
-        }
+		storage.AddToStorage(activePiece.data);
+		storage.UpdateDisplay();
 
-        storage.used = true;
-    }
+		if (oldStoredPiece.tetromino != Tetromino.Empty)
+		{
+			activePiece.Initialize(this, spawnPosition, oldStoredPiece);
+		}
+		else
+		{
+			SpawnPiece();
+		}
 
-    public void GameOver()
-    {
-        tilemap.ClearAllTiles();
+		storage.used = true;
+	}
 
-        totalPoints = 0;
-        pointsText.text = totalPoints.ToString();
-    }
+	public void GameOver()
+	{
+		tilemap.ClearAllTiles();
 
-    public void Set(Piece piece)
-    {
-        for (int i = 0; i < piece.cells.Length; i++)
-        {
-            Vector3Int tilePosition = piece.cells[i] + piece.position;
-            tilemap.SetTile(tilePosition, piece.data.tile);
-        }
-    }
+		totalPoints = 0;
+		pointsText.text = totalPoints.ToString();
+	}
 
-    public void Clear(Piece piece)
-    {
-        for (int i = 0; i < piece.cells.Length; i++)
-        {
-            Vector3Int tilePosition = piece.cells[i] + piece.position;
-            tilemap.SetTile(tilePosition, null);
-        }
-    }
+	public void Set(Piece piece)
+	{
+		for (int i = 0; i < piece.cells.Length; i++)
+		{
+			Vector3Int tilePosition = piece.cells[i] + piece.position;
+			tilemap.SetTile(tilePosition, piece.data.tile);
+		}
+	}
 
-    public bool IsValidPosition(Piece piece, Vector3Int position)
-    {
-        RectInt bounds = Bounds;
+	public void Clear(Piece piece)
+	{
+		for (int i = 0; i < piece.cells.Length; i++)
+		{
+			Vector3Int tilePosition = piece.cells[i] + piece.position;
+			tilemap.SetTile(tilePosition, null);
+		}
+	}
 
-        // The position is only valid if every cell is valid
-        for (int i = 0; i < piece.cells.Length; i++)
-        {
-            Vector3Int tilePosition = piece.cells[i] + position;
+	public bool IsValidPosition(Piece piece, Vector3Int position)
+	{
+		RectInt bounds = Bounds;
 
-            // An out of bounds tile is invalid
-            if (!bounds.Contains((Vector2Int)tilePosition)) {
-                return false;
-            }
+		// The position is only valid if every cell is valid
+		for (int i = 0; i < piece.cells.Length; i++)
+		{
+			Vector3Int tilePosition = piece.cells[i] + position;
 
-            // A tile already occupies the position, thus invalid
-            if (tilemap.HasTile(tilePosition)) {
-                return false;
-            }
-        }
+			// An out of bounds tile is invalid
+			if (!bounds.Contains((Vector2Int)tilePosition)) {
+				return false;
+			}
 
-        return true;
-    }
+			// A tile already occupies the position, thus invalid
+			if (tilemap.HasTile(tilePosition)) {
+				return false;
+			}
+		}
 
-    public int ClearLines()
-    {
-        int totalLines = 0;
-        RectInt bounds = Bounds;
-        int row = bounds.yMin;
+		return true;
+	}
 
-        // Clear from bottom to top
-        while (row < bounds.yMax)
-        {
-            // Only advance to the next row if the current is not cleared
-            // because the tiles above will fall down when a row is cleared
-            if (IsLineFull(row)) {
-                totalLines++;
-                LineClear(row);
+	public void ClearLines()
+	{
+		int totalLines = 0;
+		RectInt bounds = Bounds;
+		int row = bounds.yMin;
 
-                Transform prefab = Instantiate(particleClearLine).transform;
-                prefab.position = new Vector3(0, row + totalLines - .5f);
-            } else {
-                row++;
-            }
-            UpdatePoints(totalLines);
-        }
+		// Clear from bottom to top
+		while (row < bounds.yMax)
+		{
+			// Only advance to the next row if the current is not cleared
+			// because the tiles above will fall down when a row is cleared
+			if (IsLineFull(row)) {
+				totalLines++;
+				LineClear(row);
+			} else {
+				row++;
+			}
+			UpdatePoints(totalLines);
+		}
+	}
 
-        return totalLines;
-    }
+	public bool IsLineFull(int row)
+	{
+		RectInt bounds = Bounds;
 
-    public bool IsLineFull(int row)
-    {
-        RectInt bounds = Bounds;
+		for (int col = bounds.xMin; col < bounds.xMax; col++)
+		{
+			Vector3Int position = new Vector3Int(col, row, 0);
 
-        for (int col = bounds.xMin; col < bounds.xMax; col++)
-        {
-            Vector3Int position = new Vector3Int(col, row, 0);
+			// The line is not full if a tile is missing
+			if (!tilemap.HasTile(position)) {
+				return false;
+			}
+		}
 
-            // The line is not full if a tile is missing
-            if (!tilemap.HasTile(position)) {
-                return false;
-            }
-        }
+		return true;
+	}
 
-        return true;
-    }
+	public void LineClear(int row)
+	{
+		RectInt bounds = Bounds;
 
-    public void LineClear(int row)
-    {
-        RectInt bounds = Bounds;
+		// Clear all tiles in the row
+		for (int col = bounds.xMin; col < bounds.xMax; col++)
+		{
+			Vector3Int position = new Vector3Int(col, row, 0);
+			tilemap.SetTile(position, null);
+		}
 
-        // Clear all tiles in the row
-        for (int col = bounds.xMin; col < bounds.xMax; col++)
-        {
-            Vector3Int position = new Vector3Int(col, row, 0);
-            tilemap.SetTile(position, null);
-        }
+		// Shift every row above down one
+		while (row < bounds.yMax)
+		{
+			for (int col = bounds.xMin; col < bounds.xMax; col++)
+			{
+				Vector3Int position = new Vector3Int(col, row + 1, 0);
+				TileBase above = tilemap.GetTile(position);
 
-        // Shift every row above down one
-        while (row < bounds.yMax)
-        {
-            for (int col = bounds.xMin; col < bounds.xMax; col++)
-            {
-                Vector3Int position = new Vector3Int(col, row + 1, 0);
-                TileBase above = tilemap.GetTile(position);
+				position = new Vector3Int(col, row, 0);
+				tilemap.SetTile(position, above);
+			}
 
-                position = new Vector3Int(col, row, 0);
-                tilemap.SetTile(position, above);
-            }
+			row++;
+		}
+	}
 
-            row++;
-        }
-    }
-
-    public void UpdatePoints(int linesCleared)
-    {
-        if (linesCleared == 0) return;
-        int clearedPoints = (int)(pointsPerLine * Mathf.Pow(2, linesCleared - 1));
-        totalPoints += clearedPoints;
-        pointsText.text = totalPoints.ToString();
-    }
+	public void UpdatePoints(int linesCleared)
+	{
+		if (linesCleared == 0) return;
+		int clearedPoints = (int)(pointsPerLine * Mathf.Pow(2, linesCleared - 1));
+		totalPoints += clearedPoints;
+		pointsText.text = totalPoints.ToString();
+	}
 
 }

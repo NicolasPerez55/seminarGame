@@ -6,20 +6,32 @@ using UnityEngine.UIElements;
 public class InteractManager : MonoBehaviour
 {
 	private static InteractManager instance;
-	public static InteractManager Instance
-	{
-		get { return instance; }
-	}
-	
+	public static InteractManager Instance => instance;
+
 	public TetrominoData data { get; private set; }
 	public Vector3Int[] cells { get; private set; }
 	private Vector3 originalPosition;
+	private Vector3 originalDoorPosition;
+	private Vector3 originalDoorScale;
 	private bool isRinging = false;
-	private float shakeIntensity = 0.05f;
-	private float shakeDuration = 0.5f;
-	
+	private bool isKnocking = false;
+	private float knockDuration = 0.5f;
+
 	[SerializeField] private GameObject phone;
+	[SerializeField] private float shakeIntensity = 0.05f;
+	
 	[SerializeField] private GameObject door;
+	[SerializeField] private float knockRepetitions = 3;
+	[SerializeField] private float knockPauseDuration  = 1f;
+	[SerializeField] private float knockScaleIntensity = 5f;
+	[SerializeField] private float shakeDuration = 0.5f;
+	
+	[SerializeField] private GameObject notification;
+	
+	[SerializeField] private GameObject box;
+	
+	[SerializeField] private GameObject fish;
+	[SerializeField] private GameObject fishFood;
 
 	void Awake()
 	{
@@ -36,6 +48,8 @@ public class InteractManager : MonoBehaviour
 	void Start()
 	{
 		originalPosition = phone.transform.position;
+		originalDoorPosition = door.transform.position;
+		originalDoorScale = door.transform.localScale;
 	}
 
 	void Update()
@@ -44,16 +58,20 @@ public class InteractManager : MonoBehaviour
 		{
 			Interact();
 		}
-		
-		// Check if the phone is not in its original position and is not already ringing
+
 		if (phone.transform.position != originalPosition && !isRinging)
 		{
 			isRinging = true;
 			StartCoroutine(RingPhone());
-			Debug.Log("work");
+		}
+		
+		if (door.transform.position != originalDoorPosition && !isKnocking)
+		{
+			isKnocking = true;
+			StartCoroutine(KnockDoor()); // Start door knock animation
 		}
 	}
-	
+
 	private IEnumerator RingPhone()
 	{
 		float timePassed = 0f;
@@ -72,10 +90,47 @@ public class InteractManager : MonoBehaviour
 			yield return null;
 		}
 
-		// Return to the original position after shaking
-		//transform.position = originalPosition;
 		isRinging = false;
 	}
+
+	private IEnumerator KnockDoor()
+	{
+
+		while (true) // Keeps knocking indefinitely
+		{
+			for (int i = 0; i < knockRepetitions; i++)
+			{
+				yield return StartCoroutine(PerformSingleKnock());
+				yield return new WaitForSeconds(0.2f); // Small delay between knocks
+			}
+
+			yield return new WaitForSeconds(knockPauseDuration); // Pause before the next knocking sequence
+		}
+	}
+
+	private IEnumerator PerformSingleKnock()
+	{
+		float timePassed = 0f;
+		bool growing = true;
+
+		while (timePassed < knockDuration)
+		{
+			float scaleChange = (growing ? knockScaleIntensity : -knockScaleIntensity) * Time.deltaTime * 4;
+			door.transform.localScale += new Vector3(scaleChange, scaleChange, 0);
+
+			if (door.transform.localScale.x >= originalDoorScale.x + knockScaleIntensity)
+				growing = false;
+			else if (door.transform.localScale.x <= originalDoorScale.x)
+				growing = true;
+
+			timePassed += Time.deltaTime;
+			yield return null;
+		}
+
+		// Reset door scale
+		door.transform.localScale = originalDoorScale;
+	}
+
 
 	public void Interact()
 	{
