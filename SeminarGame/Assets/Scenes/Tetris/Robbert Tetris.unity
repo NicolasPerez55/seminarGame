@@ -564,6 +564,7 @@ GameObject:
   m_Component:
   - component: {fileID: 153708880}
   - component: {fileID: 153708881}
+  - component: {fileID: 153708882}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -638,6 +639,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &153708882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153708879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 203b223272042e845bd69ac31c055c19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phone: {fileID: 21300000, guid: 38d9daefa44b1844b9281388ac37a060, type: 3}
+  door: {fileID: 21300000, guid: e6c68cee90fa0a94a9cb28bf856bbe2f, type: 3}
+  fish: {fileID: 21300000, guid: 1ea4f42fe09d1134284070daff72b4b2, type: 3}
+  fishfood: {fileID: 21300000, guid: 19986ca1cb78bd74fb21b7b67bd47606, type: 3}
+  box: {fileID: 21300000, guid: 6a4a183ea3dcf904099aa2b4ec03fb12, type: 3}
+  phoneVector: {x: 2, y: 2, z: 2}
+  doorVector: {x: 10, y: 10, z: 10}
+  fishVector: {x: 10, y: 10, z: 10}
+  foodVector: {x: 3, y: 3, z: 3}
+  boxVector: {x: 3, y: 3, z: 3}
 --- !u!1 &186167657
 GameObject:
   m_ObjectHideFlags: 0
@@ -1240,6 +1263,7 @@ GameObject:
   m_Component:
   - component: {fileID: 557922769}
   - component: {fileID: 557922770}
+  - component: {fileID: 557922771}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -1314,6 +1338,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &557922771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557922768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 203b223272042e845bd69ac31c055c19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phone: {fileID: 21300000, guid: 38d9daefa44b1844b9281388ac37a060, type: 3}
+  door: {fileID: 21300000, guid: e6c68cee90fa0a94a9cb28bf856bbe2f, type: 3}
+  fish: {fileID: 21300000, guid: 1ea4f42fe09d1134284070daff72b4b2, type: 3}
+  fishfood: {fileID: 21300000, guid: 19986ca1cb78bd74fb21b7b67bd47606, type: 3}
+  box: {fileID: 21300000, guid: 6a4a183ea3dcf904099aa2b4ec03fb12, type: 3}
+  phoneVector: {x: 2, y: 2, z: 2}
+  doorVector: {x: 10, y: 10, z: 10}
+  fishVector: {x: 10, y: 10, z: 10}
+  foodVector: {x: 3, y: 3, z: 3}
+  boxVector: {x: 3, y: 3, z: 3}
 --- !u!1 &558673175
 GameObject:
   m_ObjectHideFlags: 0
@@ -2728,6 +2774,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1175106446}
   - component: {fileID: 1175106447}
+  - component: {fileID: 1175106448}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -2802,6 +2849,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1175106448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1175106445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 203b223272042e845bd69ac31c055c19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phone: {fileID: 21300000, guid: 38d9daefa44b1844b9281388ac37a060, type: 3}
+  door: {fileID: 21300000, guid: e6c68cee90fa0a94a9cb28bf856bbe2f, type: 3}
+  fish: {fileID: 21300000, guid: 1ea4f42fe09d1134284070daff72b4b2, type: 3}
+  fishfood: {fileID: 21300000, guid: 19986ca1cb78bd74fb21b7b67bd47606, type: 3}
+  box: {fileID: 21300000, guid: 6a4a183ea3dcf904099aa2b4ec03fb12, type: 3}
+  phoneVector: {x: 2, y: 2, z: 2}
+  doorVector: {x: 10, y: 10, z: 10}
+  fishVector: {x: 10, y: 10, z: 10}
+  foodVector: {x: 3, y: 3, z: 3}
+  boxVector: {x: 3, y: 3, z: 3}
 --- !u!1 &1253872411
 GameObject:
   m_ObjectHideFlags: 0
@@ -3060,6 +3129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1606353518}
   - component: {fileID: 1606353519}
+  - component: {fileID: 1606353520}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -3134,6 +3204,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1606353520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606353517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 203b223272042e845bd69ac31c055c19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phone: {fileID: 21300000, guid: 38d9daefa44b1844b9281388ac37a060, type: 3}
+  door: {fileID: 21300000, guid: e6c68cee90fa0a94a9cb28bf856bbe2f, type: 3}
+  fish: {fileID: 21300000, guid: 1ea4f42fe09d1134284070daff72b4b2, type: 3}
+  fishfood: {fileID: 21300000, guid: 19986ca1cb78bd74fb21b7b67bd47606, type: 3}
+  box: {fileID: 21300000, guid: 6a4a183ea3dcf904099aa2b4ec03fb12, type: 3}
+  phoneVector: {x: 2, y: 2, z: 2}
+  doorVector: {x: 10, y: 10, z: 10}
+  fishVector: {x: 10, y: 10, z: 10}
+  foodVector: {x: 3, y: 3, z: 3}
+  boxVector: {x: 3, y: 3, z: 3}
 --- !u!1 &1852172029
 GameObject:
   m_ObjectHideFlags: 0
@@ -3395,7 +3487,7 @@ MonoBehaviour:
     height: 2
   boardSize: {x: 10, y: 20}
   spawnPosition: {x: -1, y: 8, z: 0}
-  nextSpecialPieceTime: 60
+  nextSpecialPieceTime: 10
   particleClearLine: {fileID: 1849881833519876343, guid: 40f12c91eaf227e4d8de348af4e3e74c, type: 3}
   debugSpawnPiece: -1
   pointsPerLine: 100
