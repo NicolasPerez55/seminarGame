@@ -228,7 +228,14 @@ public class InteractManager : MonoBehaviour
 
 	private IEnumerator StartDisappearTimer(GameObject obj, Vector3 originalPos)
 	{
-		yield return new WaitForSeconds(disappearTime);
+		if (obj == fish)
+		{
+			yield return new WaitForSeconds(disappearTime * 5);
+		} else 
+		{
+			yield return new WaitForSeconds(disappearTime);
+		}
+		
 		float fadeDuration = 2f;
 		float elapsedTime = 0f;
 		SpriteRenderer objRenderer = obj.GetComponent<SpriteRenderer>();
