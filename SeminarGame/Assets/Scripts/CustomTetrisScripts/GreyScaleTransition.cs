@@ -20,7 +20,7 @@ public class GreyscaleTransition : MonoBehaviour
         colorGrading.saturation.value = 0;
 
         // Start the greyscale transition after 6 minutes
-        Invoke("StartGreyscaleTransition", 360f); // 360 seconds = 6 minutes
+        Invoke("StartGreyscaleTransition", 300f); // 360 seconds = 6 minutes
     }
 
     void Update()
