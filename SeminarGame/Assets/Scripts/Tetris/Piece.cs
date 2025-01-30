@@ -21,9 +21,9 @@ public class Piece : MonoBehaviour
 
 	public CameraHandler cameraHandler;
 
-	public int trailIndex;
-	public TrailRenderer trail;
-	public TrailRenderer[] trailPool;
+	int trailIndex;
+	public TrailDrop trail;
+	public TrailDrop[] trailPool;
 
 	float inputTimer;
 	public float inputTapDelay;
@@ -61,7 +61,9 @@ public class Piece : MonoBehaviour
 		for (int i = 0; i < cells.Length; i++) {
 			cells[i] = (Vector3Int)data.cells[i];
 		}
-	}
+
+        ChangeTrailSize();
+    }
 
 	private void Update()
 	{
@@ -102,7 +104,7 @@ public class Piece : MonoBehaviour
 			Step();
 		}
 
-		trail.transform.position = position;
+        trail.transform.position = position + GetTetrominoCenter();
 
 		board.Set(this);
 		
@@ -163,34 +165,43 @@ public class Piece : MonoBehaviour
 	}
 
 	private void HardDrop()
-	{
-		while (Move(Vector2Int.down)) {
-			continue;
-		}
+    {
+		Vector3 oldPos = position + GetTetrominoCenter();
 
-		trail.transform.position = position;
+        //trail.Clear();
+        //trail.emitting = true;
 
-		Lock();
+        while (Move(Vector2Int.down))
+        {
+            continue;
+        }
+
+        //Ensure trail catches up with dropped tetro.
+        trail.transform.position = position + GetTetrominoCenter();
+
+        trail.GoToLine(oldPos, trail.transform.position);
+
+        Lock();
 	}
 
 	private void Lock()
 	{
 		board.Set(this);
-		board.ClearLines();
+		int clearedLines = board.ClearLines();
 
+		for (int i = 0; i < clearedLines; i++)
+		{
+			trail.Move(Vector3.down);
+		}
+
+		//Change pooled trail.
 		SwitchTrail();
 
 		board.SpawnPiece();
 
-		trail.transform.position = position + (Vector3)data.middle;
-		trail.Clear();
-
-		// Commented out because whatever this is supposed to do, it didn't do that
-		// and instead caused the trail to be invisible
-		// trail.startWidth = data.width;
-		// trail.endWidth = data.width;
-
-	}
+		//Reset 'new' trail and set their corresponding size and position to the new piece.
+		trail.transform.position = position + GetTetrominoCenter();
+    }
 
 	private bool Move(Vector2Int translation)
 	{
@@ -222,30 +233,31 @@ public class Piece : MonoBehaviour
 
 	private void Rotate(int direction)
 	{
-		if (data.tetromino != Tetromino.Phone)
-		{
-			// Store the current rotation in case the rotation fails
-			// and we need to revert
-			int originalRotation = rotationIndex;
-
-			// Get the maximum number of rotations based on the current tetromino type
-			int maxRotation = (data.tetromino == Tetromino.Phone) ? 6 : 4;
-
-			// Rotate using the correct wrap logic for the current tetromino
-			rotationIndex = Wrap(rotationIndex + direction, 0, maxRotation);
-
-			// Apply the rotation matrix for the piece
-			ApplyRotationMatrix(direction);
-
-			// Revert the rotation if the wall kick tests fail
-			if (!TestWallKicks(rotationIndex, direction))
-			{
-				rotationIndex = originalRotation;
-				ApplyRotationMatrix(-direction);
-			}
-		}
+		if (data.tetromino == Tetromino.Phone) return;
 		
-	}
+		// Store the current rotation in case the rotation fails
+		// and we need to revert
+		int originalRotation = rotationIndex;
+
+		// Get the maximum number of rotations based on the current tetromino type
+		int maxRotation = (data.tetromino == Tetromino.Phone) ? 6 : 4;
+
+		// Rotate using the correct wrap logic for the current tetromino
+		rotationIndex = Wrap(rotationIndex + direction, 0, maxRotation);
+
+        // Apply the rotation matrix for the piece
+        ApplyRotationMatrix(direction);
+
+		// Revert the rotation if the wall kick tests fail
+		if (!TestWallKicks(rotationIndex, direction))
+		{
+			rotationIndex = originalRotation;
+			ApplyRotationMatrix(-direction);
+        }
+
+        //Update the trail;
+        ChangeTrailSize();
+    }
 
 
 	private void ApplyRotationMatrix(int direction)
@@ -321,5 +333,22 @@ public class Piece : MonoBehaviour
 		trailIndex = (trailIndex + 1) % trailPool.Length;
 
 		trail = trailPool[trailIndex];
+	}
+
+	Vector3 GetTetrominoCenter()
+	{
+		return data.middle[rotationIndex];
+    }
+
+	void ChangeTrailSize()
+	{
+		if (rotationIndex % 2 == 0)
+		{
+			trail.Resize(data.width);
+		}
+		else
+        {
+            trail.Resize(data.height);
+        }
 	}
 }

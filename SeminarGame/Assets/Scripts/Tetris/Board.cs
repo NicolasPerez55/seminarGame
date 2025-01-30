@@ -17,6 +17,10 @@ public class Board : MonoBehaviour
     public Vector2Int boardSize = new Vector2Int(10, 20);
     public Vector3Int spawnPosition = new Vector3Int(-1, 8, 0);
 
+    public GameObject particleClearLine;
+
+    public int spawnpiece;
+
     public RectInt Bounds
     {
         get
@@ -66,6 +70,9 @@ public class Board : MonoBehaviour
         {
             int random = Random.Range(0, tetrominoes.Length);
             queue.queuedPieces.Add(tetrominoes[random]);
+
+            //Useful for debugging specific pieces.
+            //queue.queuedPieces.Add(tetrominoes[spawnpiece]);
         }
 
         activePiece.Initialize(this, spawnPosition, queue.queuedPieces.FirstOrDefault());
@@ -157,7 +164,7 @@ public class Board : MonoBehaviour
         return true;
     }
 
-    public void ClearLines()
+    public int ClearLines()
     {
         int totalLines = 0;
         RectInt bounds = Bounds;
@@ -171,11 +178,16 @@ public class Board : MonoBehaviour
             if (IsLineFull(row)) {
                 totalLines++;
                 LineClear(row);
+
+                Transform prefab = Instantiate(particleClearLine).transform;
+                prefab.position = new Vector3(0, row + totalLines - .5f);
             } else {
                 row++;
             }
             UpdatePoints(totalLines);
         }
+
+        return totalLines;
     }
 
     public bool IsLineFull(int row)

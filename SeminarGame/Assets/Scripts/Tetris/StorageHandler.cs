@@ -6,7 +6,7 @@ public class StorageHandler : MonoBehaviour
 {
     public TetrominoData piece;
 
-    public SpriteRenderer renderer;
+    public SpriteRenderer render;
     public PreviewEntries previewEntries;
 
     public bool used;
@@ -15,12 +15,12 @@ public class StorageHandler : MonoBehaviour
     {
         if (piece.tetromino == Tetromino.Empty)
         {
-            renderer.sprite = null;
+            render.sprite = null;
 
             return;
         }
 
-        renderer.sprite = previewEntries.entries[piece.tetromino];
+        render.sprite = previewEntries.entries[piece.tetromino];
     }
 
     public void AddToStorage(TetrominoData data)
