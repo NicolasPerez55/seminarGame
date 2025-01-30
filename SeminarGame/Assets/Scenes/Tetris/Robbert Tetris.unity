@@ -175,10 +175,10 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: e6c68cee90fa0a94a9cb28bf856bbe2f, type: 3}
   - type: 10
     sprite: {fileID: 21300000, guid: 1ea4f42fe09d1134284070daff72b4b2, type: 3}
-  - type: 11
-    sprite: {fileID: 21300000, guid: 6a4a183ea3dcf904099aa2b4ec03fb12, type: 3}
   - type: 12
     sprite: {fileID: 21300000, guid: 19986ca1cb78bd74fb21b7b67bd47606, type: 3}
+  - type: 11
+    sprite: {fileID: 21300000, guid: 6a4a183ea3dcf904099aa2b4ec03fb12, type: 3}
 --- !u!4 &2510760
 Transform:
   m_ObjectHideFlags: 0
@@ -3104,15 +3104,6 @@ MonoBehaviour:
     width: 2
     height: 3
   - tile: {fileID: 11400000, guid: 89eae29ecf56ea14c8b3927213a00066, type: 2}
-    tetromino: 11
-    middle:
-    - {x: 1, y: 2}
-    - {x: 1, y: 1}
-    - {x: 0, y: 1}
-    - {x: 0, y: 2}
-    width: 2
-    height: 2
-  - tile: {fileID: 11400000, guid: 89eae29ecf56ea14c8b3927213a00066, type: 2}
     tetromino: 12
     middle:
     - {x: 1, y: 2}
@@ -3121,6 +3112,15 @@ MonoBehaviour:
     - {x: 0.5, y: 2}
     width: 2
     height: 3
+  - tile: {fileID: 11400000, guid: 89eae29ecf56ea14c8b3927213a00066, type: 2}
+    tetromino: 11
+    middle:
+    - {x: 1, y: 2}
+    - {x: 1, y: 1}
+    - {x: 0, y: 1}
+    - {x: 0, y: 2}
+    width: 2
+    height: 2
   boardSize: {x: 10, y: 20}
   spawnPosition: {x: -1, y: 8, z: 0}
   nextSpecialPieceTime: 60
