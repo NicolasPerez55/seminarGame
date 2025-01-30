@@ -2752,6 +2752,7 @@ MonoBehaviour:
   debugSpawnPiece: -1
   pointsPerLine: 100
   pointsText: {fileID: 115304492}
+  highScoreText: {fileID: 0}
 --- !u!1 &1993827430
 GameObject:
   m_ObjectHideFlags: 0
@@ -2924,6 +2925,7 @@ GameObject:
   - component: {fileID: 2120471111}
   - component: {fileID: 2120471113}
   - component: {fileID: 2120471114}
+  - component: {fileID: 2120471115}
   m_Layer: 0
   m_Name: fish
   m_TagString: Untagged
@@ -3032,6 +3034,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.4, y: 0.4, z: 0.2}
   m_Center: {x: 0.00000047683716, y: -0.000000059604645, z: -0.000000059604645}
+--- !u!54 &2120471115
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120471110}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2144466704
 GameObject:
   m_ObjectHideFlags: 0
