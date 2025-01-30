@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Tetris/TetrisScenes/ModeScene.unity
-    guid: c156a6b34383d4487b0d238b1c8cc0a9
+    path: Assets/Scenes/Tetris/Robbert Tetris.unity
+    guid: 3935b289f93fd474986ad65eb9131a18
   - enabled: 1
-    path: Assets/Tetris/TetrisScenes/GameScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/FirstPerson.unity
+    guid: 599a2e564de54bf4fadd0b2ab892d11a
   m_configObjects: {}
