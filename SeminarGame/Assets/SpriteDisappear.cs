@@ -16,7 +16,7 @@ public class SpriteDisappear : MonoBehaviour
 
         sprite.color = new Color(1, 1, 1, speed.Evaluate(timer));
 
-        Debug.Log(timer + "  " + speed.Evaluate(timer));
+        // Debug.Log(timer + "  " + speed.Evaluate(timer));
 
         if (timer <= 0) enabled = false;
     }

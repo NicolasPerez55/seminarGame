@@ -373,10 +373,12 @@ public class Piece : MonoBehaviour
 	{
 		if (rotationIndex % 2 == 0)
 		{
+			print(data.width);
 			trail.Resize(data.width);
 		}
 		else
         {
+			print(data.height);
             trail.Resize(data.height);
         }
 	}
