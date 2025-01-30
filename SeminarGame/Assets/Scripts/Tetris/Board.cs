@@ -20,7 +20,7 @@ public class Board : MonoBehaviour
     private float elapsedTime;
     [SerializeField] private int nextSpecialPieceTime = 60; // First special piece appears at 1 min
     private int specialPieceIndex = 7; // Start at 8th tetromino (index 7)
-    private List<int> specialPieces = new List<int> { 7, 8, 9, 10, 11 }; // Indices of the special pieces
+    private List<int> specialPieces = new List<int> { 7, 8, 9, 10, 11, 12 }; // Indices of the special pieces
 
     public GameObject particleClearLine;
 
