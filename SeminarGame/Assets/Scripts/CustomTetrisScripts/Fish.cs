@@ -10,7 +10,8 @@ public class Fish : MonoBehaviour
 	{
 		if (other.gameObject == fishfood)
 		{
-			Destroy(other.gameObject);
+			other.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+			other.gameObject.GetComponent<Collider>().enabled = false;
 		}
 	}
 }

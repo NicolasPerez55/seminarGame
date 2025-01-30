@@ -14,9 +14,17 @@ public class InteractManager : MonoBehaviour
 	private Vector3 originalPosition;
 	private Vector3 originalDoorPosition;
 	private Vector3 originalDoorScale;
+	private Vector3 originalNotificationPosition;
+	private Vector3 originalBoxPosition;
+	private Vector3 originalFishPosition;
+	private Vector3 originalFishFoodPosition;
+	
 	private bool isRinging = false;
 	private bool isKnocking = false;
 	private float knockDuration = 0.5f;
+	[SerializeField] private float disappearTime = 3f;
+	private Dictionary<GameObject, Coroutine> activeDisappearCoroutines = new Dictionary<GameObject, Coroutine>();
+
 
 	[SerializeField] private GameObject phone;
 	[SerializeField] private float shakeIntensity = 0.05f;
@@ -51,6 +59,10 @@ public class InteractManager : MonoBehaviour
 		originalPosition = phone.transform.position;
 		originalDoorPosition = door.transform.position;
 		originalDoorScale = door.transform.localScale;
+		originalNotificationPosition = notification.transform.position;
+		originalBoxPosition = box.transform.position;
+		originalFishPosition = fish.transform.position;
+		originalFishFoodPosition = fishFood.transform.position;
 	}
 
 	void Update()
@@ -75,6 +87,26 @@ public class InteractManager : MonoBehaviour
 		if (Input.GetMouseButtonDown(0)) // Left click
 		{
 			DetectClick();
+		}
+		
+		CheckObjectMovement(phone, originalPosition);
+		CheckObjectMovement(door, originalDoorPosition);
+		CheckObjectMovement(notification, originalNotificationPosition);
+		CheckObjectMovement(box, originalBoxPosition);
+		CheckObjectMovement(fish, originalFishPosition);
+		CheckObjectMovement(fishFood, originalFishFoodPosition);
+	}
+	
+	private void CheckObjectMovement(GameObject obj, Vector3 originalPos)
+	{
+		if (obj.transform.position != originalPos)
+		{
+			// Start coroutine only if one is NOT already running for this object
+			//if (!activeDisappearCoroutines.ContainsKey(obj))
+			//{
+				Coroutine disappearCoroutine = StartCoroutine(StartDisappearTimer(obj, originalPos));
+				activeDisappearCoroutines[obj] = disappearCoroutine;
+			//}
 		}
 	}
 	
@@ -182,6 +214,33 @@ public class InteractManager : MonoBehaviour
 		door.transform.localScale = originalDoorScale;
 	}
 
+	private IEnumerator StartDisappearTimer(GameObject obj, Vector3 originalPos)
+	{
+		yield return new WaitForSeconds(disappearTime);
+		float fadeDuration = 2f;
+		float elapsedTime = 0f;
+		SpriteRenderer objRenderer = obj.GetComponent<SpriteRenderer>();
+		Color originalColor = objRenderer.material.color;
+
+		while (elapsedTime < fadeDuration)
+		{
+			float alpha = Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration);
+			objRenderer.material.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+			elapsedTime += Time.deltaTime;
+			yield return null;
+		}
+		
+		if (obj == phone)
+		{
+			obj.GetComponent<SpriteRenderer>().enabled = false;
+			obj.GetComponent<Collider>().enabled = false;
+		}
+		
+		obj.transform.position = originalPos;
+		objRenderer.material.color = originalColor;
+		
+		//activeDisappearCoroutines.Remove(obj);
+	}
 
 	public void Interact()
 	{
