@@ -3163,8 +3163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78ed8cdedec4ebb4a9bf08c1a4b9a42d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slowStartTime: 0
-  stopTime: 30
+  slowStartTime: 360
+  stopTime: 480
 --- !u!4 &1852172031
 Transform:
   m_ObjectHideFlags: 0

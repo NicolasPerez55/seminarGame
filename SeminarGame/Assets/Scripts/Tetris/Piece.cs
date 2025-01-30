@@ -29,6 +29,7 @@ public class Piece : MonoBehaviour
 	public float inputTapDelay;
 	public float inputHoldDelay;
 	bool holding;
+	private float startTime;
 	
 	[SerializeField] private GameObject phone; 
 	[SerializeField] private Vector3 phoneOffset;
@@ -37,22 +38,23 @@ public class Piece : MonoBehaviour
 	[SerializeField] private GameObject door;
 	[SerializeField] private Vector3 doorOffset;
 
-    [SerializeField] private GameObject notification;
-    [SerializeField] private Vector3 notificationOffset;
+	[SerializeField] private GameObject notification;
+	[SerializeField] private Vector3 notificationOffset;
 
-    [SerializeField] private GameObject box;
-    [SerializeField] private Vector3 boxOffset;
+	[SerializeField] private GameObject box;
+	[SerializeField] private Vector3 boxOffset;
 
-    [SerializeField] private GameObject fish;
-    [SerializeField] private Vector3 fishOffset;
+	[SerializeField] private GameObject fish;
+	[SerializeField] private Vector3 fishOffset;
 
-    [SerializeField] private GameObject fishFood;
-    [SerializeField] private Vector3 foodOffset;
+	[SerializeField] private GameObject fishFood;
+	[SerializeField] private Vector3 foodOffset;
 
 
-    public void Start()
+	public void Start()
 	{
 		phonePosition = phone.transform.position;
+		startTime = Time.time; // Track the start time
 	}
 	public void Initialize(Board board, Vector3Int position, TetrominoData data)
 	{
@@ -75,8 +77,8 @@ public class Piece : MonoBehaviour
 			cells[i] = (Vector3Int)data.cells[i];
 		}
 
-        ChangeTrailSize();
-    }
+		ChangeTrailSize();
+	}
 
 	private void Update()
 	{
@@ -117,7 +119,7 @@ public class Piece : MonoBehaviour
 			Step();
 		}
 
-        trail.transform.position = position + GetTetrominoCenter();
+		trail.transform.position = position + GetTetrominoCenter();
 
 		board.Set(this);
 		
@@ -178,23 +180,24 @@ public class Piece : MonoBehaviour
 	}
 
 	private void HardDrop()
-    {
+	{
+		// Disable hard drop after 7 minutes
+		if (Time.time - startTime >= 420f) 
+		{
+			return;
+		}
+
 		Vector3 oldPos = position + GetTetrominoCenter();
 
-        //trail.Clear();
-        //trail.emitting = true;
+		while (Move(Vector2Int.down))
+		{
+			continue;
+		}
 
-        while (Move(Vector2Int.down))
-        {
-            continue;
-        }
+		trail.transform.position = position + GetTetrominoCenter();
+		trail.GoToLine(oldPos, trail.transform.position);
 
-        //Ensure trail catches up with dropped tetro.
-        trail.transform.position = position + GetTetrominoCenter();
-
-        trail.GoToLine(oldPos, trail.transform.position);
-
-        Lock();
+		Lock();
 	}
 
 	private void Lock()
@@ -214,7 +217,7 @@ public class Piece : MonoBehaviour
 
 		//Reset 'new' trail and set their corresponding size and position to the new piece.
 		trail.transform.position = position + GetTetrominoCenter();
-    }
+	}
 
 	private bool Move(Vector2Int translation)
 	{
@@ -238,23 +241,23 @@ public class Piece : MonoBehaviour
 			} else if (data.tetromino == Tetromino.Door)
 			{
 				door.transform.position = newPosition + doorOffset;
-            }
-            else if (data.tetromino == Tetromino.Not)
-            {
-                notification.transform.position = newPosition + notificationOffset;
-            }
-            else if (data.tetromino == Tetromino.Box)
-            {
-                box.transform.position = newPosition + boxOffset;
-            }
-            else if (data.tetromino == Tetromino.Fish)
-            {
-                fish.transform.position = newPosition + fishOffset;
-            }
-            else if (data.tetromino == Tetromino.FishFood)
-            {
-                fishFood.transform.position = newPosition + foodOffset;
-            }
+			}
+			else if (data.tetromino == Tetromino.Not)
+			{
+				notification.transform.position = newPosition + notificationOffset;
+			}
+			else if (data.tetromino == Tetromino.Box)
+			{
+				box.transform.position = newPosition + boxOffset;
+			}
+			else if (data.tetromino == Tetromino.Fish)
+			{
+				fish.transform.position = newPosition + fishOffset;
+			}
+			else if (data.tetromino == Tetromino.FishFood)
+			{
+				fishFood.transform.position = newPosition + foodOffset;
+			}
 		}
 
 		return valid;
@@ -274,19 +277,19 @@ public class Piece : MonoBehaviour
 		// Rotate using the correct wrap logic for the current tetromino
 		rotationIndex = Wrap(rotationIndex + direction, 0, maxRotation);
 
-        // Apply the rotation matrix for the piece
-        ApplyRotationMatrix(direction);
+		// Apply the rotation matrix for the piece
+		ApplyRotationMatrix(direction);
 
 		// Revert the rotation if the wall kick tests fail
 		if (!TestWallKicks(rotationIndex, direction))
 		{
 			rotationIndex = originalRotation;
 			ApplyRotationMatrix(-direction);
-        }
+		}
 
-        //Update the trail;
-        ChangeTrailSize();
-    }
+		//Update the trail;
+		ChangeTrailSize();
+	}
 
 
 	private void ApplyRotationMatrix(int direction)
@@ -367,7 +370,7 @@ public class Piece : MonoBehaviour
 	Vector3 GetTetrominoCenter()
 	{
 		return data.middle[rotationIndex];
-    }
+	}
 
 	void ChangeTrailSize()
 	{
@@ -377,9 +380,9 @@ public class Piece : MonoBehaviour
 			trail.Resize(data.width);
 		}
 		else
-        {
+		{
 			print(data.height);
-            trail.Resize(data.height);
-        }
+			trail.Resize(data.height);
+		}
 	}
 }
