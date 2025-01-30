@@ -111,33 +111,33 @@ public class Board : MonoBehaviour
         }
     }
 
-    public void StorePiece()
-    {
-        if (storage == null)
-        {
-            Debug.LogError("Attach a storage component to the board.");
+    // public void StorePiece()
+    // {
+    //     if (storage == null)
+    //     {
+    //         Debug.LogError("Attach a storage component to the board.");
 
-            return;
-        }
+    //         return;
+    //     }
 
-        if (storage.used) return;
+    //     if (storage.used) return;
 
-        TetrominoData oldStoredPiece = storage.piece;
+    //     TetrominoData oldStoredPiece = storage.piece;
 
-        storage.AddToStorage(activePiece.data);
-        storage.UpdateDisplay();
+    //     storage.AddToStorage(activePiece.data);
+    //     storage.UpdateDisplay();
 
-        if (oldStoredPiece.tetromino != Tetromino.Empty)
-        {
-            activePiece.Initialize(this, spawnPosition, oldStoredPiece);
-        }
-        else
-        {
-            SpawnPiece();
-        }
+    //     if (oldStoredPiece.tetromino != Tetromino.Empty)
+    //     {
+    //         activePiece.Initialize(this, spawnPosition, oldStoredPiece);
+    //     }
+    //     else
+    //     {
+    //         SpawnPiece();
+    //     }
 
-        storage.used = true;
-    }
+    //     storage.used = true;
+    // }
 
     public void GameOver()
     {

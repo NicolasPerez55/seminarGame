@@ -101,10 +101,10 @@ public class Piece : MonoBehaviour
 		}
 
 		//Store piece.
-		if (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.C))
-		{
-			board.StorePiece();
-		}
+		// if (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.C))
+		// {
+		// 	board.StorePiece();
+		// }
 
 		// Allow the player to hold movement keys but only after a move delay
 		// so it does not move too fast
