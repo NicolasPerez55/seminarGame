@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class Fish : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other) 
-    {
-        if (other.gameObject.name == "fishFood")
-        {
-            Destroy(other.gameObject);
-        }
-    }
+	[SerializeField] private GameObject fishfood;
+	private void OnTriggerEnter(Collider other) 
+	{
+		if (other.gameObject == fishfood)
+		{
+			Destroy(other.gameObject);
+		}
+	}
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -70,6 +71,56 @@ public class InteractManager : MonoBehaviour
 			isKnocking = true;
 			StartCoroutine(KnockDoor()); // Start door knock animation
 		}
+		
+		if (Input.GetMouseButtonDown(0)) // Left click
+		{
+			DetectClick();
+		}
+	}
+	
+	private void DetectClick()
+	{
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hit;
+
+		if (Physics.Raycast(ray, out hit))
+		{
+			Debug.Log(hit.collider.gameObject.name);
+			if (hit.collider.gameObject == phone)
+			{
+				HandlePhoneInteraction();
+			} else if (hit.collider.gameObject == door)
+			{
+				HandleDoorInteraction();
+			} else if (hit.collider.gameObject == notification)
+			{
+				HandleNotificationInteraction();
+			} else if (hit.collider.gameObject == box)
+			{
+				HandleBoxInteraction();
+			}
+		}
+	}
+	
+	private void HandlePhoneInteraction()
+	{
+		Debug.Log("Phone was clicked! Performing interaction...");
+		// TODO: Add actual phone interaction logic here (e.g., open a UI, trigger an event)
+	}
+	
+	private void HandleDoorInteraction()
+	{
+		Debug.Log("door");
+	}
+	
+	private void HandleNotificationInteraction()
+	{
+		Debug.Log("notification");
+	}
+	
+	private void HandleBoxInteraction()
+	{
+		Debug.Log("box");
 	}
 
 	private IEnumerator RingPhone()

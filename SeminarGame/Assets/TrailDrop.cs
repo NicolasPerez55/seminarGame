@@ -48,8 +48,8 @@ public class TrailDrop : MonoBehaviour
     {
         line.startWidth = size;
         line.endWidth = size;
-        print(line.startWidth);
-        print(line.endWidth);
+        //print(line.startWidth);
+        //print(line.endWidth);
     }
 
     public void Move(Vector3 translation)

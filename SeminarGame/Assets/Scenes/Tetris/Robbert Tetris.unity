@@ -204,6 +204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 16849532}
   - component: {fileID: 16849531}
+  - component: {fileID: 16849533}
   m_Layer: 0
   m_Name: fishFood
   m_TagString: Untagged
@@ -278,6 +279,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 901846298}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &16849533
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16849530}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 0.9, z: 0.20000003}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &115304490
 GameObject:
   m_ObjectHideFlags: 0
@@ -1058,6 +1080,7 @@ GameObject:
   m_Component:
   - component: {fileID: 558673177}
   - component: {fileID: 558673176}
+  - component: {fileID: 558673178}
   m_Layer: 0
   m_Name: emailIconNotifications
   m_TagString: Untagged
@@ -1132,6 +1155,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 901846298}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &558673178
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558673175}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 0.2}
+  m_Center: {x: -0.0000019073486, y: 0.00000023841858, z: 0}
 --- !u!1 &564011153
 GameObject:
   m_ObjectHideFlags: 0
@@ -1262,6 +1306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 611020135}
   - component: {fileID: 611020134}
+  - component: {fileID: 611020136}
   m_Layer: 0
   m_Name: door
   m_TagString: Untagged
@@ -1336,6 +1381,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 901846298}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &611020136
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611020133}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.140625, y: 0.29296875, z: 0.2}
+  m_Center: {x: 0, y: -0.000000029802322, z: 0}
 --- !u!1 &646788977
 GameObject:
   m_ObjectHideFlags: 0
@@ -1652,10 +1718,10 @@ MonoBehaviour:
   knockPauseDuration: 1
   knockScaleIntensity: 5
   shakeDuration: 0.5
-  notification: {fileID: 0}
-  box: {fileID: 0}
-  fish: {fileID: 0}
-  fishFood: {fileID: 0}
+  notification: {fileID: 558673175}
+  box: {fileID: 2064996597}
+  fish: {fileID: 2120471110}
+  fishFood: {fileID: 16849530}
 --- !u!4 &984687520
 Transform:
   m_ObjectHideFlags: 0
@@ -1737,7 +1803,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1057610499}
   - component: {fileID: 1057610498}
-  - component: {fileID: 1057610501}
+  - component: {fileID: 1057610500}
   m_Layer: 0
   m_Name: Phone
   m_TagString: Untagged
@@ -1812,15 +1878,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 901846298}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 10.831}
---- !u!61 &1057610501
-BoxCollider2D:
+--- !u!65 &1057610500
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1057610497}
-  m_Enabled: 1
-  m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1829,34 +1893,12 @@ BoxCollider2D:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
   m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.6484375, y: 1.1244708}
-    newSize: {x: 13.280001, y: 23.029163}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.6484375, y: 1.1244708}
-  m_EdgeRadius: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.6484375, y: 1.1244708, z: 0.2}
+  m_Center: {x: 0, y: 0.00000011920929, z: 0}
 --- !u!1 &1062971706
 GameObject:
   m_ObjectHideFlags: 0
@@ -2705,7 +2747,7 @@ MonoBehaviour:
     height: 3
   boardSize: {x: 10, y: 20}
   spawnPosition: {x: -1, y: 8, z: 0}
-  nextSpecialPieceTime: 60
+  nextSpecialPieceTime: 10
   particleClearLine: {fileID: 1849881833519876343, guid: 40f12c91eaf227e4d8de348af4e3e74c, type: 3}
   debugSpawnPiece: -1
   pointsPerLine: 100
@@ -2774,6 +2816,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2064996599}
   - component: {fileID: 2064996598}
+  - component: {fileID: 2064996600}
   m_Layer: 0
   m_Name: mobingBoxIKEA
   m_TagString: Untagged
@@ -2848,6 +2891,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 901846298}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2064996600
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064996597}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.68359375, y: 0.68359375, z: 0.2}
+  m_Center: {x: 0.0000019073486, y: 0, z: -0.00000023841858}
 --- !u!1 &2120471110
 GameObject:
   m_ObjectHideFlags: 0
@@ -2858,6 +2922,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2120471112}
   - component: {fileID: 2120471111}
+  - component: {fileID: 2120471113}
+  - component: {fileID: 2120471114}
   m_Layer: 0
   m_Name: fish
   m_TagString: Untagged
@@ -2932,6 +2998,40 @@ Transform:
   m_Children: []
   m_Father: {fileID: 901846298}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2120471113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120471110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8631d34ed0780534ba62636c32aebd54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishfood: {fileID: 16849530}
+--- !u!65 &2120471114
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120471110}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4, y: 0.4, z: 0.2}
+  m_Center: {x: 0.00000047683716, y: -0.000000059604645, z: -0.000000059604645}
 --- !u!1 &2144466704
 GameObject:
   m_ObjectHideFlags: 0
