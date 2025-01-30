@@ -1652,10 +1652,10 @@ MonoBehaviour:
   knockPauseDuration: 1
   knockScaleIntensity: 5
   shakeDuration: 0.5
-  notification: {fileID: 0}
-  box: {fileID: 0}
-  fish: {fileID: 0}
-  fishFood: {fileID: 0}
+  notification: {fileID: 558673175}
+  box: {fileID: 2064996597}
+  fish: {fileID: 2120471110}
+  fishFood: {fileID: 16849530}
 --- !u!4 &984687520
 Transform:
   m_ObjectHideFlags: 0
