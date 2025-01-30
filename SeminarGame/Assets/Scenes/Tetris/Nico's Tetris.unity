@@ -1207,9 +1207,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5271814134484294683, guid: 9aaebfb197b00ef449b35dc7095c3edf, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 4375817224841503232, guid: 9aaebfb197b00ef449b35dc7095c3edf, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 9aaebfb197b00ef449b35dc7095c3edf, type: 3}
 --- !u!1 &557922768
 GameObject:
@@ -2192,6 +2189,7 @@ MonoBehaviour:
   box: {fileID: 2064996597}
   fish: {fileID: 2120471110}
   fishFood: {fileID: 16849530}
+  messagePrefab: {fileID: 889425746017285386, guid: 9aaebfb197b00ef449b35dc7095c3edf, type: 3}
 --- !u!4 &984687520
 Transform:
   m_ObjectHideFlags: 0

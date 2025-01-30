@@ -43,6 +43,17 @@ public class InteractManager : MonoBehaviour
 	[SerializeField] private GameObject fish;
 	[SerializeField] private GameObject fishFood;
 
+	private AudioSource audio;
+	[SerializeField] private AudioClip phoneRingingSound;
+	[SerializeField] private AudioClip doorKnockingSound;
+	private string currentRealityObjectSound = "none";
+
+	//Text Message related stuff
+	[SerializeField] private GameObject messagePrefab;
+
+	//Interaction Tracking related stuff
+	public float interactionLevel = 0; //Increases as the player interacts with reality in Tetris
+
 	void Awake()
 	{
 		if (instance == null)
@@ -64,6 +75,8 @@ public class InteractManager : MonoBehaviour
 		originalBoxPosition = box.transform.position;
 		originalFishPosition = fish.transform.position;
 		originalFishFoodPosition = fishFood.transform.position;
+
+		audio = GetComponent<AudioSource>();
 	}
 
 	void Update()
@@ -77,12 +90,26 @@ public class InteractManager : MonoBehaviour
 		{
 			isRinging = true;
 			StartCoroutine(RingPhone());
+			if (currentRealityObjectSound != "phoneRinging" && currentRealityObjectSound != "doorKnocking")
+            {
+				audio.mute = false;
+				audio.clip = phoneRingingSound;
+				audio.Play();
+				currentRealityObjectSound = "phoneRinging";
+			}
 		}
 		
 		if (door.transform.position != originalDoorPosition && !isKnocking)
 		{
 			isKnocking = true;
 			StartCoroutine(KnockDoor()); // Start door knock animation
+			if (currentRealityObjectSound != "doorKnocking" && currentRealityObjectSound != "phoneRinging")
+			{
+				audio.mute = false;
+				audio.clip = doorKnockingSound;
+				audio.Play();
+				currentRealityObjectSound = "doorKnocking";
+			}
 		}
 		
 		if (Input.GetMouseButtonDown(0)) // Left click
@@ -139,24 +166,28 @@ public class InteractManager : MonoBehaviour
 	{
 		phone.GetComponent<SpriteRenderer>().enabled = false;
 		phone.GetComponent<Collider>().enabled = false;
-		
-		Interact();
+
+		muteRealityObjectSound();
+		//currentRealityObjectSound = "none";
+		CreateTextMessage("phonecall", new Vector2(phone.transform.position.x, phone.transform.position.y + 5));
 	}
 	
 	private void HandleDoorInteraction()
 	{
 		door.GetComponent<SpriteRenderer>().enabled = false;
 		door.GetComponent<Collider>().enabled = false;
-		
-		Interact();
+
+		muteRealityObjectSound();
+		//currentRealityObjectSound = "none";
+		CreateTextMessage("door", new Vector2(door.transform.position.x, door.transform.position.y + 5));
 	}
 	
 	private void HandleNotificationInteraction()
 	{
 		notification.GetComponent<SpriteRenderer>().enabled = false;
 		notification.GetComponent<Collider>().enabled = false;
-		
-		Interact();
+
+		CreateTextMessage("email", new Vector2(notification.transform.position.x, notification.transform.position.y + 5));
 	}
 	
 	private void HandleBoxInteraction()
@@ -265,4 +296,16 @@ public class InteractManager : MonoBehaviour
 	{
 		FindAnyObjectByType<CameraHandler>().IncrementZoom();
 	}
+
+	private void CreateTextMessage(string type, Vector2 location)
+    {
+		GameObject newMessage = Instantiate(messagePrefab);
+		newMessage.GetComponent<TextMessage>().setType(type);
+		newMessage.transform.position = location;
+    }
+
+	public void muteRealityObjectSound()
+    {
+		audio.mute = true;
+    }
 }

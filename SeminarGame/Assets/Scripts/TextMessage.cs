@@ -8,8 +8,11 @@ public class TextMessage : MonoBehaviour
     private AudioSource audio;
     [SerializeField] private AudioClip notificationSound;
     [SerializeField] private AudioClip newMessageSound;
+    [SerializeField] private AudioClip voicecallSound;
+    [SerializeField] private AudioClip neighbourSound;
 
-    [SerializeField] private TextMeshPro receivedText;
+    [SerializeField] private TextMeshPro receivedText; //Main text of the message
+    private InteractManager manager;
 
     //The two option buttons
     [SerializeField] private MessageButton option1;
@@ -20,6 +23,14 @@ public class TextMessage : MonoBehaviour
 
     void Start()
     {
+        manager = FindAnyObjectByType<InteractManager>();
+        audio = GetComponent<AudioSource>();
+        
+    }
+
+    public void setType(string type)
+    {
+        messageType = type;
         audio = GetComponent<AudioSource>();
         switch (messageType)
         {
@@ -29,7 +40,8 @@ public class TextMessage : MonoBehaviour
                 option1.text.text = "...";
                 option2.text.text = "Maybe.";
 
-                //PLAY VOICECLIP OF PERSON TALKING IN PHONE HERE
+                audio.clip = voicecallSound;
+                audio.Play();
                 option2.gameObject.SetActive(false);
                 break;
             case "voicemail":
@@ -42,26 +54,28 @@ public class TextMessage : MonoBehaviour
                 option2.gameObject.SetActive(false);
                 break;
             case "email":
-                receivedText.text = "NEW EMAIL RECEIVED\nHello, John. \n We've been missing you at the office. I hope you're doing well, the news about Eve was a big shock to all of us. How much longer are you going to be on leave?\n\nWith many wishes,\nJake";
+                receivedText.text = "NEW EMAIL RECEIVED\nHello, John.\n We've been missing you at the office. The news about Eve was a big shock to all of us. How much longer are you going to be on leave?";
 
                 option1.text.text = "EXIT";
                 option2.text.text = "REPLY";
 
                 audio.clip = notificationSound;
                 audio.Play();
+                option2.gameObject.SetActive(true);
                 break;
             case "door":
             default:
                 receivedText.text = "Howdy Neighbour! Barely seen your face in like, two months! I noticed you've left a garbage bag here in the hall for a week. Are you going to take it out soon?";
 
                 option1.text.text = "...";
-                option2.text.text = "...";
+                option2.text.text = "I will.";
 
-                //PLAY VOICECLIP OF PERSON TALKING AT THE DOOR HERE
+                option2.gameObject.SetActive(true);
+                audio.clip = neighbourSound;
+                audio.Play();
                 break;
         }
     }
-
     void Update()
     {
         switch (messageType)
@@ -99,28 +113,29 @@ public class TextMessage : MonoBehaviour
             case "phonecall":
                 if (buttonNumber == 1)
                 {
-                    //INSERT CALL TO A CENTRAL MANAGER OF PLAYER CHOICES HERE
+                    manager.Interact();
                     closeMessage();
                 }
                 else
                 {
-                    //INSERT CALL TO A CENTRAL MANAGER OF PLAYER CHOICES HERE
+                    manager.Interact();
+                    manager.Interact();
                     closeMessage();
                 }
                 break;
             case "voicemail":
-                //INSERT CALL TO A CENTRAL MANAGER OF PLAYER CHOICES HERE
                 closeMessage();
                 break;
             case "email":
                 if (buttonNumber == 1)
                 {
-                    //INSERT CALL TO A CENTRAL MANAGER OF PLAYER CHOICES HERE
+                    manager.Interact();
                     closeMessage();
                 }
                 else
                 {
-                    //INSERT CALL TO A CENTRAL MANAGER OF PLAYER CHOICES HERE
+                    manager.Interact();
+                    manager.Interact();
                     closeMessage();
                 }
                 break;
@@ -128,12 +143,13 @@ public class TextMessage : MonoBehaviour
             default:
                 if (buttonNumber == 1)
                 {
-                    //INSERT CALL TO A CENTRAL MANAGER OF PLAYER CHOICES HERE
+                    manager.Interact();
                     closeMessage();
                 }
                 else
                 {
-                    //INSERT CALL TO A CENTRAL MANAGER OF PLAYER CHOICES HERE
+                    manager.Interact();
+                    manager.Interact();
                     closeMessage();
                 }
                 break;

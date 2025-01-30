@@ -56,6 +56,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   notificationSound: {fileID: 8300000, guid: fe8290d757d76764d827499b48ecf864, type: 3}
   newMessageSound: {fileID: 8300000, guid: 8426ddd054eef0e488901dfaeb72258e, type: 3}
+  voicecallSound: {fileID: 8300000, guid: 184b0e731bd8f454bb8ad4d45cd7eb48, type: 3}
+  neighbourSound: {fileID: 8300000, guid: 5bdabe09284220349a0ac6c0dd01396e, type: 3}
+  receivedText: {fileID: 8014523400408302956}
   option1: {fileID: 7358130698563353211}
   option2: {fileID: 4654138683338277355}
   phonecallTimer: 0
@@ -70,7 +73,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: fe8290d757d76764d827499b48ecf864, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -258,7 +261,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1361408336940182376
 Transform:
   m_ObjectHideFlags: 0
@@ -386,7 +389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonNumber: 2
   mouseOverThis: 0
-  text: {fileID: 0}
+  text: {fileID: 990452754697865158}
 --- !u!1 &2217961038980201947
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,7 +536,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonNumber: 1
   mouseOverThis: 0
-  text: {fileID: 0}
+  text: {fileID: 8527444880239242649}
 --- !u!1 &4375817224841503232
 GameObject:
   m_ObjectHideFlags: 0
