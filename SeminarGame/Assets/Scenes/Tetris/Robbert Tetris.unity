@@ -2749,7 +2749,7 @@ MonoBehaviour:
     height: 3
   boardSize: {x: 10, y: 20}
   spawnPosition: {x: -1, y: 8, z: 0}
-  nextSpecialPieceTime: 60
+  nextSpecialPieceTime: 10
   particleClearLine: {fileID: 1849881833519876343, guid: 40f12c91eaf227e4d8de348af4e3e74c, type: 3}
   debugSpawnPiece: -1
   pointsPerLine: 100

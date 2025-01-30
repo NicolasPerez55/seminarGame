@@ -23,6 +23,7 @@ public class InteractManager : MonoBehaviour
 	private bool isKnocking = false;
 	private float knockDuration = 0.5f;
 	[SerializeField] private float disappearTime = 3f;
+	private float fishFoodTrigger = 0;
 	private Dictionary<GameObject, Coroutine> activeDisappearCoroutines = new Dictionary<GameObject, Coroutine>();
 
 
@@ -136,23 +137,34 @@ public class InteractManager : MonoBehaviour
 	
 	private void HandlePhoneInteraction()
 	{
-		Debug.Log("Phone was clicked! Performing interaction...");
-		// TODO: Add actual phone interaction logic here (e.g., open a UI, trigger an event)
+		phone.GetComponent<SpriteRenderer>().enabled = false;
+		phone.GetComponent<Collider>().enabled = false;
+		
+		Interact();
 	}
 	
 	private void HandleDoorInteraction()
 	{
-		Debug.Log("door");
+		door.GetComponent<SpriteRenderer>().enabled = false;
+		door.GetComponent<Collider>().enabled = false;
+		
+		Interact();
 	}
 	
 	private void HandleNotificationInteraction()
 	{
-		Debug.Log("notification");
+		notification.GetComponent<SpriteRenderer>().enabled = false;
+		notification.GetComponent<Collider>().enabled = false;
+		
+		Interact();
 	}
 	
 	private void HandleBoxInteraction()
 	{
-		Debug.Log("box");
+		box.GetComponent<SpriteRenderer>().enabled = false;
+		box.GetComponent<Collider>().enabled = false;
+		
+		Interact();
 	}
 
 	private IEnumerator RingPhone()

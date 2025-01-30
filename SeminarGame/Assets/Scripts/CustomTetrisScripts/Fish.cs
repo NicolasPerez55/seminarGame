@@ -12,6 +12,7 @@ public class Fish : MonoBehaviour
 		{
 			other.gameObject.GetComponent<SpriteRenderer>().enabled = false;
 			other.gameObject.GetComponent<Collider>().enabled = false;
+			InteractManager.Instance.Interact();
 		}
 	}
 }
