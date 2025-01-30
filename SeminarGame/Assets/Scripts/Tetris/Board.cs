@@ -38,11 +38,16 @@ public class Board : MonoBehaviour
 
     [Header("Points")]
     [SerializeField] private int pointsPerLine = 100;
-    [SerializeField] private TMPro.TextMeshProUGUI pointsText;
+    [SerializeField] private TMPro.TextMeshProUGUI pointsText, highScoreText;
     private int totalPoints;
     [HideInInspector] public int TotalPoints
     {
         get => totalPoints;
+    }
+    private int highScore;
+    [HideInInspector] public int HighScore
+    {
+        get => highScore;
     }
 
     private void Awake()
@@ -264,6 +269,18 @@ public class Board : MonoBehaviour
         int clearedPoints = (int)(pointsPerLine * Mathf.Pow(2, linesCleared - 1));
         totalPoints += clearedPoints;
         pointsText.text = totalPoints.ToString();
+
+        SetHighScore();
+    }
+
+    public void SetHighScore()
+    {
+        if (totalPoints > highScore)
+        {
+            highScore = totalPoints;
+            highScoreText.text = "High Score: " + highScore.ToString();
+        }
+        else return;
     }
 
 }
