@@ -13,6 +13,8 @@ public class soundManager : MonoBehaviour
     [SerializeField] private AudioSource lineClearSound;
 
     [SerializeField] private AudioSource computerStatic;
+
+    [SerializeField] private bool creepySoundMode = false;
     void Start()
     {
         
@@ -23,6 +25,7 @@ public class soundManager : MonoBehaviour
         
         if (musicStartLoweringTimer >= 300)
         {
+            creepySoundMode = true;
             secondTimer += Time.deltaTime;
             if (secondTimer >= 1)
             {
