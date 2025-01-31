@@ -196,13 +196,14 @@ public class Piece : MonoBehaviour
 
 		trail.transform.position = position + GetTetrominoCenter();
 		trail.GoToLine(oldPos, trail.transform.position);
-
+		board.playInstaDropSound();
 		Lock();
 	}
 
 	private void Lock()
 	{
 		board.Set(this);
+		board.playPieceSettleSound();
 		int clearedLines = board.ClearLines();
 
 		for (int i = 0; i < clearedLines; i++)

@@ -866,6 +866,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!82 &363790134 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4610906847974478864, guid: ebcd039a48a8bfc47961ee266ec4be75, type: 3}
+  m_PrefabInstance: {fileID: 1391572944527469622}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &427366342
 GameObject:
   m_ObjectHideFlags: 0
@@ -1777,6 +1782,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!82 &667185210 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1579368317695530648, guid: ebcd039a48a8bfc47961ee266ec4be75, type: 3}
+  m_PrefabInstance: {fileID: 1391572944527469622}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &675672315
 GameObject:
   m_ObjectHideFlags: 0
@@ -3320,6 +3330,11 @@ MonoBehaviour:
   fishVector: {x: 10, y: 10, z: 10}
   foodVector: {x: 3, y: 3, z: 3}
   boxVector: {x: 3, y: 3, z: 3}
+--- !u!82 &1806166943 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4598385995545645567, guid: ebcd039a48a8bfc47961ee266ec4be75, type: 3}
+  m_PrefabInstance: {fileID: 1391572944527469622}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1852172029
 GameObject:
   m_ObjectHideFlags: 0
@@ -4213,6 +4228,18 @@ PrefabInstance:
       propertyPath: music
       value: 
       objectReference: {fileID: 912332204}
+    - target: {fileID: 1587832038509369123, guid: ebcd039a48a8bfc47961ee266ec4be75, type: 3}
+      propertyPath: instaDropSound
+      value: 
+      objectReference: {fileID: 667185210}
+    - target: {fileID: 1587832038509369123, guid: ebcd039a48a8bfc47961ee266ec4be75, type: 3}
+      propertyPath: lineClearSound
+      value: 
+      objectReference: {fileID: 363790134}
+    - target: {fileID: 1587832038509369123, guid: ebcd039a48a8bfc47961ee266ec4be75, type: 3}
+      propertyPath: pieceSettleSound
+      value: 
+      objectReference: {fileID: 1806166943}
     - target: {fileID: 2396765416934664313, guid: ebcd039a48a8bfc47961ee266ec4be75, type: 3}
       propertyPath: m_Volume
       value: 0.6

@@ -27,6 +27,9 @@ public class Board : MonoBehaviour
 
 	public int debugSpawnPiece = -1;
 
+	private soundManager sounds;
+	private float soundCooldown = 0.1f;
+
 	public RectInt Bounds
 	{
 		get
@@ -66,6 +69,7 @@ public class Board : MonoBehaviour
 		SpawnPiece();
 		
 		originalNextSpecialPieceTime = nextSpecialPieceTime;
+		sounds = FindAnyObjectByType<soundManager>();
 	}
 
 	void Update()
@@ -79,6 +83,14 @@ public class Board : MonoBehaviour
 			queue.queuedPieces.Add(tetrominoes[specialPieces[0]]); // Add the special piece
 			specialPieces.RemoveAt(0); // Remove it from the list so it doesn't appear again
 		}
+		if (soundCooldown >= 0)
+        {
+			soundCooldown -= Time.deltaTime;
+        }
+		if (soundCooldown < 0)
+        {
+			soundCooldown = 0;
+        }
 	}
 
 	public void SpawnPiece()
@@ -264,6 +276,8 @@ public class Board : MonoBehaviour
 
 			row++;
 		}
+		sounds.lineClear();
+		soundCooldown = 0.1f;
 	}
 
 	public void UpdatePoints(int linesCleared)
@@ -284,6 +298,25 @@ public class Board : MonoBehaviour
 			highScoreText.text = "High Score: " + highScore.ToString();
 		}
 		else return;
+	}
+
+	public void playPieceSettleSound()
+    {
+		if (soundCooldown <= 0)
+        {
+			sounds.pieceSettles();
+			soundCooldown = 0.1f;
+		}
+		
+    }
+
+	public void playInstaDropSound()
+    {
+		if (soundCooldown <= 0)
+		{
+			sounds.instaDrop();
+			soundCooldown = 0.1f;
+		}
 	}
 
 }

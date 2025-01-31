@@ -7,6 +7,10 @@ public class soundManager : MonoBehaviour
     [SerializeField] private AudioSource music;
     [SerializeField] private float musicStartLoweringTimer = 0;
     [SerializeField] private float secondTimer = 0;
+
+    [SerializeField] private AudioSource pieceSettleSound;
+    [SerializeField] private AudioSource instaDropSound;
+    [SerializeField] private AudioSource lineClearSound;
     void Start()
     {
         
@@ -28,5 +32,20 @@ public class soundManager : MonoBehaviour
         {
             musicStartLoweringTimer += Time.deltaTime;
         }
+    }
+
+    public void pieceSettles()
+    {
+        pieceSettleSound.Play();
+    }
+
+    public void instaDrop()
+    {
+        instaDropSound.Play();
+    }
+
+    public void lineClear()
+    {
+        lineClearSound.Play();
     }
 }
