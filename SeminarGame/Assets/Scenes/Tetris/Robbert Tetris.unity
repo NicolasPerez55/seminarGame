@@ -3026,6 +3026,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1342738473}
   - component: {fileID: 1342738472}
+  - component: {fileID: 1342738474}
   m_Layer: 0
   m_Name: silhouette-of-a-man
   m_TagString: Untagged
@@ -3075,7 +3076,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 15
   m_Sprite: {fileID: 21300000, guid: c67d30cf282a48747a4ede11750c3410, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.47058824}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3100,6 +3101,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1342738474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342738471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77129386b2d921148915fd2178b42ab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1573500723
 GameObject:
   m_ObjectHideFlags: 0
@@ -3571,7 +3584,7 @@ MonoBehaviour:
     height: 2
   boardSize: {x: 10, y: 20}
   spawnPosition: {x: -1, y: 8, z: 0}
-  nextSpecialPieceTime: 10
+  nextSpecialPieceTime: 60
   particleClearLine: {fileID: 1849881833519876343, guid: 40f12c91eaf227e4d8de348af4e3e74c, type: 3}
   debugSpawnPiece: -1
   pointsPerLine: 100
