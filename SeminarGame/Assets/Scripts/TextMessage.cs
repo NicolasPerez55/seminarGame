@@ -49,7 +49,7 @@ public class TextMessage : MonoBehaviour
 
                 option1.text.text = "EXIT";
 
-                audio.clip = newMessageSound;
+                audio.clip = voicecallSound;
                 audio.Play();
                 option2.gameObject.SetActive(false);
                 break;

@@ -46,7 +46,13 @@ public class InteractManager : MonoBehaviour
 	private AudioSource audio;
 	[SerializeField] private AudioClip phoneRingingSound;
 	[SerializeField] private AudioClip doorKnockingSound;
+	[SerializeField] private AudioClip voicemailSound1;
+	[SerializeField] private AudioClip voicemailSound2;
 	private string currentRealityObjectSound = "none";
+	[SerializeField] private int voicemailClipStage = 0; //If 0 or 2 it does nothing. 1 progresses to 2
+	[SerializeField] private float voicemailClipTimer = 0;
+	[SerializeField] private Vector2 voicemailPosition;
+	private bool hasStartedVoicemail = false;
 
 	//Text Message related stuff
 	[SerializeField] private GameObject messagePrefab;
@@ -123,6 +129,20 @@ public class InteractManager : MonoBehaviour
 		CheckObjectMovement(box, originalBoxPosition);
 		CheckObjectMovement(fish, originalFishPosition);
 		CheckObjectMovement(fishFood, originalFishFoodPosition);
+
+		if (voicemailClipStage == 1)
+        {
+			voicemailClipTimer += Time.deltaTime;
+			if (voicemailClipTimer >= 4)
+            {
+				voicemailClipTimer = 0;
+				voicemailClipStage = 2;
+				audio.clip = voicemailSound2;
+				audio.mute = false;
+				audio.Play();
+				CreateTextMessage("voicemail", new Vector2(voicemailPosition.x, voicemailPosition.y + 5));
+			}
+        }
 	}
 	
 	private void CheckObjectMovement(GameObject obj, Vector3 originalPos)
@@ -284,6 +304,16 @@ public class InteractManager : MonoBehaviour
 		{
 			obj.GetComponent<SpriteRenderer>().enabled = false;
 			obj.GetComponent<Collider>().enabled = false;
+			if (!hasStartedVoicemail)
+            {
+				hasStartedVoicemail = true;
+				voicemailPosition = obj.transform.position;
+				voicemailClipStage = 1;
+				audio.mute = false;
+				audio.clip = voicemailSound1;
+				audio.Play();
+			}
+			
 		}
 		
 		obj.transform.position = originalPos;
