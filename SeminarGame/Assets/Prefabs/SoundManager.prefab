@@ -176,6 +176,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c949a0ee4101a74382e76f4fd0fd6dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  music: {fileID: 2396765416934664313}
+  musicStartLoweringTimer: 0
+  secondTimer: 0
+  pieceSettleSound: {fileID: 4598385995545645567}
+  instaDropSound: {fileID: 1579368317695530648}
+  lineClearSound: {fileID: 4610906847974478864}
 --- !u!1 &985511031870662358
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,7 +226,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d38d1271fb56cb1419d18760f50ba05d, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.394
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 1
   Mute: 0
