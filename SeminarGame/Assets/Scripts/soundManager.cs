@@ -11,6 +11,8 @@ public class soundManager : MonoBehaviour
     [SerializeField] private AudioSource pieceSettleSound;
     [SerializeField] private AudioSource instaDropSound;
     [SerializeField] private AudioSource lineClearSound;
+
+    [SerializeField] private AudioSource computerStatic;
     void Start()
     {
         
@@ -25,7 +27,19 @@ public class soundManager : MonoBehaviour
             if (secondTimer >= 1)
             {
                 secondTimer = 0;
-                music.volume -= 0.003f;
+                if (music.volume > 0)
+                {
+                    music.volume -= 0.003f;
+                    if (music.volume <= 0.001f)
+                    {
+                        music.volume = 0;
+                    }
+                }
+                computerStatic.volume += 0.003f;
+                if (computerStatic.volume >= 0.250f)
+                {
+                    computerStatic.volume = 0.25f;
+                }
             }
         }
         else
