@@ -14,6 +14,10 @@ public class soundManager : MonoBehaviour
 
     [SerializeField] private AudioSource computerStatic;
 
+    [SerializeField] private AudioSource breathingSounds;
+
+    [SerializeField] private float breathingStartTimer = 0;
+    [SerializeField] private bool breathingStarted = false;
     [SerializeField] private bool creepySoundMode = false;
     void Start()
     {
@@ -48,6 +52,20 @@ public class soundManager : MonoBehaviour
         else
         {
             musicStartLoweringTimer += Time.deltaTime;
+        }
+        if (creepySoundMode)
+        {
+            if (breathingStartTimer <= 85)
+                breathingStartTimer += Time.deltaTime;
+            else if (breathingStartTimer > 85)
+            {
+                if (breathingStarted == false)
+                {
+                    breathingStarted = true;
+                    breathingSounds.Play();
+                }
+            }
+
         }
     }
 
